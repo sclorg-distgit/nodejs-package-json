@@ -7,7 +7,7 @@
 Summary:       Get the package.json of a package from the npm registry
 Name:          %{?scl_prefix}nodejs-%{npm_name}
 Version:       2.3.0
-Release:       4%{?dist}
+Release:       5%{?dist}
 License:       MIT
 URL:           https://github.com/sindresorhus/package-json
 Source0:       http://registry.npmjs.org/%{npm_name}/-/%{npm_name}-%{version}.tgz
@@ -21,6 +21,8 @@ Get the package.json of a package from the npm registry.
 
 %prep
 %setup -q -n package
+
+%nodejs_fixdep semver 5.x
 
 %build
 
@@ -37,6 +39,9 @@ cp -pr index.js package.json %{buildroot}%{nodejs_sitelib}/%{npm_name}
 %{nodejs_sitelib}/%{npm_name}
 
 %changelog
+* Wed Feb 24 2016 Zuzana Svetlikova <zsvetlik@redhat.com> - 2.3.0-5
+- Fix dependency
+
 * Tue Feb 16 2016 Zuzana Svetlikova <zsvetlik@redhat.com> - 2.3.0-4
 - Use macro in -runtime dependency
 
